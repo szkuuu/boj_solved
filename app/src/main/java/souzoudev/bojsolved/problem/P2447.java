@@ -12,7 +12,7 @@ public class P2447 {
             bw.write(Q(n));
         } catch (IOException e) {}
     }
-
+    
     public static String Q(int n, int cmp, String cell) {
         var cellSplit = cell.split("\n");
         String blankRow = " ".repeat(cmp / 3);
