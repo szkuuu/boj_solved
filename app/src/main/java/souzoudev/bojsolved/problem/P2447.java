@@ -13,43 +13,25 @@ public class P2447 {
         } catch (IOException e) {}
     }
 
-    public static String Q(int n, int w, int h, StringBuilder sb) {
-        if (n == 3) {
-            return sb.append("***\n").append("* *\n").append("***").toString();
+    public static String Q(int n, int cmp, String cell) {
+        var cellSplit = cell.split("\n");
+        String blankRow = " ".repeat(cmp / 3);
+
+        var nextCell = new StringBuilder();
+
+        for (int i = 0; i < 3; ++i) {
+            for (var str : cellSplit) {
+                nextCell.append(str).append(i == 1 ? blankRow : str).append(str);
+                nextCell.append('\n');
+            }
         }
 
-        final int centerSize = n / 3;
-        final int sectorSize = centerSize;
-        final int coverSize = centerSize / 3;
-        final int nextSector = h + sectorSize;
+        if (n == cmp) return nextCell.toString();
 
-        while (h < nextSector) {
-            if (w == n) {
-                sb.append('\n');
-                w = 0;
-                ++h;
-
-                continue;
-            }
-
-            final boolean isCover = ((w / coverSize) % coverSize == 1) && ((h / coverSize) % coverSize == 1);
-            final boolean isCenter = ((w / centerSize) % centerSize == 1) && ((h / centerSize) % centerSize == 1);
-    
-            if (h % 3 == 0 || h % 3 == 2) {
-                sb.append(isCover || isCenter ? " " : "*");
-            } else {
-                sb.append(isCover || isCenter || w % 3 == 1 ? " " : "*");
-            }
-
-            ++w;
-        }
-
-        if (h == n) return sb.toString();
-
-        return Q(n, w, h, sb);
+        return Q(n, cmp * 3, nextCell.toString());
     }
 
     public static String Q(int n) {
-        return Q(n, 0, 0, new StringBuilder());
+        return Q(n, 3, "*");
     }
 }
