@@ -3,10 +3,10 @@
  */
 package souzoudev.bojsolved;
 
-import souzoudev.bojsolved.problem.P2108;
+import souzoudev.bojsolved.problem.P11650;
 
 public class App {
     public static void main(String[] args) {
-        P2108.solution(args);
+        P11650.solution(args);
     }
 }
